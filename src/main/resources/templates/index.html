@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="EN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TXT Converter</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+
+    <div class="wrapper">
+
+        <div class="card">
+            <h1>TXT Converter</h1>
+            <p class="subtitle">Convert TXT → CSV or Excel instantly</p>
+
+            <form method="post" action="/convert" enctype="multipart/form-data">
+
+                <!-- Drag Drop -->
+                <label class="upload-box">
+                    <input id="fileInput" type="file" name="file" accept=".txt,text/plain" required hidden>
+                    <div id="uploadText">
+                        <span class="icon">📄</span>
+                        <p>Drag & Drop TXT file</p>
+                        <small>or click to browse</small>
+                    </div>
+                </label>
+
+                <!-- Separator -->
+                <div class="field">
+                    <label>Separator</label>
+
+                    <input id="separatorInput" type="text" name="separator" placeholder="Choose or type separator"
+                        required>
+
+                    <div class="separator-hints">
+                        <span data-value=",">Comma ,</span>
+                        <span data-value="|">Pipe |</span>
+                        <span data-value=";">Semicolon ;</span>
+                        <span data-value="\t">Tab ↹</span>
+                        <span data-value=" ">Space ␣</span>
+                    </div>
+                </div>
+
+                <!-- Type -->
+                <div class="field">
+                    <label for="file-type">Convert To</label>
+                    <select id="file-type" name="type">
+                        <option value="csv">CSV</option>
+                        <option value="excel">Excel (.xlsx)</option>
+                    </select>
+                </div>
+
+                <button id="convertBtn" type="submit" class="convert-btn" disabled>
+                    Convert File
+                </button>
+            </form>
+        </div>
+
+    </div>
+
+    <script src="/js/script.js"></script>
+
+</body>
+
+</html>

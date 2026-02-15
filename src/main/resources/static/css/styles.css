@@ -1,0 +1,171 @@
+/* Background */
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(120deg, #89f7fe, #66a6ff);
+    height: 100vh;
+}
+
+/* Center */
+.wrapper {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Card Glass Effect */
+.card {
+    width: 420px;
+    padding: 35px 40px;
+    border-radius: 18px;
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    background: rgba(255, 255, 255, 0.75);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+/* Title */
+.card h1 {
+    margin: 0;
+    font-size: 28px;
+    color: #2c3e50;
+}
+
+.subtitle {
+    margin-top: 5px;
+    margin-bottom: 25px;
+    color: #555;
+    font-size: 14px;
+}
+
+/* Upload Box */
+.upload-box {
+    display: block;
+    border: 2px dashed #66a6ff;
+    padding: 30px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.25s;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.upload-box:hover {
+    background: rgba(102, 166, 255, 0.15);
+    transform: scale(1.02);
+}
+
+.upload-box .icon {
+    font-size: 40px;
+}
+
+.upload-box p {
+    margin: 8px 0 3px;
+    font-weight: 600;
+}
+
+.upload-box small {
+    color: #666;
+}
+
+/* Fields */
+.field {
+    text-align: left;
+    margin-bottom: 18px;
+}
+
+.field label {
+    font-weight: 600;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Inputs */
+input[type="text"],
+select {
+    width: 100%;
+    margin-top: 6px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    transition: 0.25s;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #66a6ff;
+    box-shadow: 0 0 8px rgba(102, 166, 255, 0.4);
+}
+
+/* Button */
+.convert-btn {
+    width: 100%;
+    padding: 13px;
+    border-radius: 10px;
+    border: none;
+    margin-top: 10px;
+    background: linear-gradient(90deg, #4facfe, #00f2fe);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.convert-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Drag active effect */
+.upload-box.dragover {
+    border-color: #00f2fe;
+    background: rgba(0, 242, 254, 0.15);
+    transform: scale(1.03);
+}
+
+/* Separator helper chips */
+.separator-hints {
+    margin-top: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.separator-hints span {
+    background: rgba(102, 166, 255, 0.15);
+    color: #2c3e50;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: 0.25s;
+    border: 1px solid transparent;
+}
+
+.separator-hints span:hover {
+    background: rgba(102, 166, 255, 0.35);
+    transform: translateY(-1px);
+}
+
+.separator-hints span.active {
+    background: linear-gradient(90deg, #4facfe, #00f2fe);
+    color: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.convert-btn:disabled {
+    background: #bfc9d4;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+.convert-btn.loading {
+    opacity: 0.85;
+    cursor: wait;
+    pointer-events: none;
+}
