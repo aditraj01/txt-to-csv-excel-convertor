@@ -59,31 +59,43 @@ form.addEventListener("submit", async function (e) {
             body: formData
         });
 
-        if (!response.ok) {
-            throw new Error("Conversion failed");
+        // ---- RATE LIMIT HANDLING ----
+        const remaining = response.headers.get("X-Rate-Limit-Remaining");
+        if (remaining !== null) {
+            console.log("Remaining uploads:", remaining);
         }
 
-        // Get filename from header
+        if (response.status === 429) {
+            const text = await response.text();
+            showError("Rate limit exceeded. Wait 1 minute.");
+            throw new Error(text);
+        }
+
+        if (!response.ok) {
+            throw new Error("Server error");
+        }
+
+        // ---- GET FILENAME ----
         let filename = "converted-file";
         const disposition = response.headers.get("Content-Disposition");
         if (disposition && disposition.includes("filename=")) {
             filename = disposition.split("filename=")[1].replace(/"/g, "");
         }
 
-        // Convert response to blob
+        // ---- DOWNLOAD FILE ----
         const blob = await response.blob();
-
-        // Create download
         const url = window.URL.createObjectURL(blob);
+
         const a = document.createElement("a");
         a.href = url;
         a.download = filename;
         document.body.appendChild(a);
         a.click();
         a.remove();
+
         window.URL.revokeObjectURL(url);
 
-        // Reset form after success
+        // ---- RESET UI ----
         form.reset();
         uploadText.innerHTML = `
             <span class="icon">📄</span>
@@ -92,11 +104,14 @@ form.addEventListener("submit", async function (e) {
         `;
         uploadText.style.color = "";
         hints.forEach(h => h.classList.remove("active"));
+
     } catch (err) {
-        showError("Conversion failed. Please try again.");
+        console.error(err);
+        if (!uploadText.innerHTML.includes("Rate limit"))
+            showError("Conversion failed. Please try again.");
     }
 
-    // Unlock UI
+    // ---- UNLOCK UI ----
     formSubmitting = false;
     convertBtn.innerHTML = "Convert File";
     convertBtn.classList.remove("loading");
